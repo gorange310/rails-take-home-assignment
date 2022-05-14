@@ -1,0 +1,19 @@
+<%= link_to '點我建立新的追蹤清單', new_portfolio_url(user_id: params[:user_id]) %>
+<hr>
+
+<%= form_tag portfolios_url, method: :get do %>
+  <%= label_tag :user_id, 'User ID' %>
+  <%= select_tag :user_id, options_for_select(User.pluck(:id, :id)) %>
+  <%= submit_tag '切換使用者' %>
+<% end %>
+
+<% if @portfolios.blank? %>
+  <h2>你還沒有建立股票清單哦！</h2>
+<% else %>
+  <% @portfolios.each do |portfolio| %>
+    <br><%= portfolio.name %>
+    <%= link_to '編輯追蹤清單頁', edit_portfolio_url(portfolio) %>
+    <%= link_to '刪除', portfolio_url(portfolio), method: :delete %>
+    <br><%= link_to '點我新增追蹤股', '' %>
+  <% end %>
+<% end %>
