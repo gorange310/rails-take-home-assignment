@@ -10,7 +10,17 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_05_14_083802) do
+ActiveRecord::Schema.define(version: 2022_05_14_083927) do
+
+  create_table "portfolio_stocks", force: :cascade do |t|
+    t.integer "portfolio_id"
+    t.integer "stock_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["portfolio_id", "stock_id"], name: "index_portfolio_stocks_on_portfolio_id_and_stock_id", unique: true
+    t.index ["portfolio_id"], name: "index_portfolio_stocks_on_portfolio_id"
+    t.index ["stock_id"], name: "index_portfolio_stocks_on_stock_id"
+  end
 
   create_table "portfolios", force: :cascade do |t|
     t.integer "user_id"
