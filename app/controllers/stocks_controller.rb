@@ -16,4 +16,9 @@ class StocksController < ApplicationController
     end
   end
 
+  def destroy
+    @portfolio_stock = PortfolioStock.find(params[:id])
+    @portfolio_stock.destroy
+    redirect_to portfolios_url
+  end
 end
