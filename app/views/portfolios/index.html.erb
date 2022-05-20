@@ -21,9 +21,9 @@
       </tr>
       <tr>
         <% portfolio.portfolio_stocks.each do |portfolio_stock| %>
-              <td><%= portfolio_stock.stock.ticker %></td>
-              <td><%= portfolio_stock.stock.name %></td>
-              <td><%= link_to '刪除', portfolio_stock_url(portfolio, portfolio_stock), method: :delete %></td>
+          <td><%= portfolio_stock.stock.ticker %></td>
+          <td><%= portfolio_stock.stock.name %></td>
+          <td><%= link_to '刪除', portfolio_stock_url(portfolio, portfolio_stock), method: :delete %></td>
           <% end %>
       </tr>
       <tr>
