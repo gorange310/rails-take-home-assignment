@@ -20,8 +20,14 @@
         <th><%= link_to '刪除', portfolio_url(portfolio), method: :delete %></th>
       </tr>
       <tr>
+        <% portfolio.portfolio_stocks.each do |portfolio_stock| %>
+              <td><%= portfolio_stock.stock.ticker %></td>
+              <td><%= portfolio_stock.stock.name %></td>
+              <td><%= link_to '刪除', portfolio_stock_url(portfolio, portfolio_stock), method: :delete %></td>
+          <% end %>
+      </tr>
       <tr>
-        <td><%= link_to '點我新增追蹤股', '' %></td>
+        <td><%= link_to '點我新增追蹤股', new_portfolio_stock_url(portfolio) %></td>
       </tr>
     <% end %>
   </table>
