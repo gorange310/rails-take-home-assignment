@@ -13,11 +13,21 @@
   <h2>你還沒有建立股票清單哦！</h2>
 <% else %>
   <table>
-    <% @portfolios.each do |portfolio| %>
+    <% @portfolios.each_with_index do |portfolio, index| %>
       <tr>
         <th><%= portfolio.name %></th>
         <th><%= link_to '編輯追蹤清單頁', edit_portfolio_url(portfolio) %></th>
         <th><%= link_to '刪除', portfolio_url(portfolio), method: :delete %></th>
+        <th>
+          <% if index > 0 %>
+            <%= link_to '上移', up_portfolio_url(portfolio), method: :patch %>
+          <% end %>
+        </th>
+        <th>
+          <% if index < @portfolios.size - 1 %>
+            <%= link_to '下移', down_portfolio_url(portfolio), method: :patch %>
+          <% end %>
+        </th>
       </tr>
       <tr>
         <% portfolio.portfolio_stocks.each do |portfolio_stock| %>

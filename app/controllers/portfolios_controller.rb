@@ -1,9 +1,9 @@
 class PortfoliosController < ApplicationController
-  before_action :set_portfolio, only: %w[edit update destroy]
+  before_action :set_portfolio, only: %w[edit update destroy up down]
 
   def index
     params[:user_id] ||= User.first.id
-    @portfolios = Portfolio.where(user_id: params[:user_id]).includes(:portfolio_stocks => :stock)
+    @portfolios = Portfolio.where(user_id: params[:user_id]).includes(:portfolio_stocks => :stock).order(:position)
   end
 
   def new
@@ -30,6 +30,24 @@ class PortfoliosController < ApplicationController
 
   def destroy
     @portfolio.destroy
+    redirect_to portfolios_url(user_id: @portfolio.user_id)
+  end
+
+  def up
+    ActiveRecord::Base.transaction do
+      pre_portfolio = @portfolio.user.portfolios.find_by(position: @portfolio.position - 1)
+      pre_portfolio.update(position: @portfolio.position)
+      @portfolio.update(position: @portfolio.position - 1)
+    end
+    redirect_to portfolios_url(user_id: @portfolio.user_id)
+  end
+
+  def down
+    ActiveRecord::Base.transaction do
+      next_portfolio = @portfolio.user.portfolios.find_by(position: @portfolio.position + 1)
+      next_portfolio.update(position: @portfolio.position)
+      @portfolio.update(position: @portfolio.position + 1)
+    end
     redirect_to portfolios_url(user_id: @portfolio.user_id)
   end
 
