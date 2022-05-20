@@ -1,0 +1,7 @@
+<h2>新增追蹤股於 <%= @portfolio.name %></h2>
+<%= form_tag portfolio_stocks_url, method: :post do %>
+  <%= hidden_field_tag :portfolio_id %>
+  <%= text_field_tag :keyword, '', placeholder: '輸入股號', required: true %>
+
+  <%= submit_tag '建立追蹤清單' %>
+<% end %>
