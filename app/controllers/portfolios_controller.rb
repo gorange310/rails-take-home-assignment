@@ -3,7 +3,7 @@ class PortfoliosController < ApplicationController
 
   def index
     params[:user_id] ||= User.first.id
-    @portfolios = Portfolio.where(user_id: params[:user_id])
+    @portfolios = Portfolio.where(user_id: params[:user_id]).includes(:portfolio_stocks => :stock)
   end
 
   def new
