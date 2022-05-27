@@ -1,6 +1,34 @@
-# README
+## Requirements
 
-This project is generated with the following command:
+- Rails
+- Ruby
+- sqlite3
+
+### Init project
+
+---
+
 ```
-rails new statementdog-backend-take-home-project --database=sqlite3 -M -C -T --skip-action-mailbox --skip-active-storage --skip-action-text
+rake db:create
+rake db:migrate
 ```
+
+### Start dev server
+
+---
+
+```
+rails s
+```
+
+### Routes
+
+---
+
+
+[http://localhost:3000/](http://localhost:3000/portfolios)
+
+
+### Test
+
+- `bundle exec rake spec`
